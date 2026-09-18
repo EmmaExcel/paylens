@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+easyocr
+Pillow
+httpx
+python-dotenv
+python-multipart
+numpy

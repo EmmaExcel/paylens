@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #15202b;
+  background: #e9edf2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --ink: #15202b;
+  --muted: #6e7c89;
+  --line: #d9e0e7;
+  --paper: #fff;
+  --blue: #1769e0;
+  --blue-dark: #0f54ba;
+  --soft-blue: #edf4ff;
+  --danger: #c63f3f;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button { font: inherit; }
+button:focus-visible { outline: 3px solid rgba(23, 105, 224, .35); outline-offset: 3px; }
+#root { width: 100%; min-height: 100vh; }
+
+.app-container { min-height: 100vh; background: var(--paper); }
+.capture-screen { width: min(100% - 40px, 760px); margin: 0 auto; padding: 54px 0 28px; }
+.intro { margin-bottom: 22px; }
+.eyebrow { margin: 0 0 10px; color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: .13em; }
+h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+.intro h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); letter-spacing: -.04em; line-height: 1.05; }
+.intro > p:last-child { max-width: 450px; margin: 12px 0 0; color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+.camera-container { position: relative; height: min(58vh, 500px); min-height: 340px; overflow: hidden; border-radius: 18px; background: #111820; }
+.camera-video { width: 100%; height: 100%; object-fit: cover; }
+.camera-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; pointer-events: none; }
+.camera-mask { flex: 1; background: rgba(4, 10, 16, .52); }
+.scan-box-wrapper { display: flex; justify-content: center; padding: 0 12%; }
+.scan-box { position: relative; width: 100%; height: 150px; border: 1px solid rgba(255,255,255,.9); border-radius: 12px; box-shadow: 0 0 0 2000px rgba(4,10,16,.52); }
+.scan-box::before, .scan-box::after, .scan-box-inner::before, .scan-box-inner::after { content: ''; position: absolute; width: 18px; height: 18px; border-color: #fff; border-style: solid; }
+.scan-box::before { inset: -1px auto auto -1px; border-width: 3px 0 0 3px; border-radius: 10px 0 0; }
+.scan-box::after { inset: -1px -1px auto auto; border-width: 3px 3px 0 0; border-radius: 0 10px 0 0; }
+.scan-box-inner { position: absolute; inset: 0; }
+.scan-box-inner::before { inset: auto auto -1px -1px; border-width: 0 0 3px 3px; border-radius: 0 0 0 10px; }
+.scan-box-inner::after { inset: auto -1px -1px auto; border-width: 0 3px 3px 0; border-radius: 0 0 10px; }
+.instruction-text { margin: 14px 0 0; color: #fff; text-align: center; font-size: 13px; }
+.camera-controls { position: absolute; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center; height: 104px; gap: 56px; padding-top: 14px; background: linear-gradient(transparent, rgba(0,0,0,.75)); }
+.camera-control-spacer { width: 44px; height: 44px; }
+.icon-btn { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.35); border-radius: 50%; color: #fff; background: rgba(0,0,0,.28); cursor: pointer; }
+.shutter-btn { width: 62px; height: 62px; padding: 4px; border: 3px solid #fff; border-radius: 50%; background: transparent; cursor: pointer; }
+.shutter-inner { width: 100%; height: 100%; border-radius: 50%; background: #fff; }
+.capture-note { margin: 14px 0 0; color: var(--muted); font-size: 12px; text-align: center; }
+
+.processing-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 20px; text-align: center; }
+.scanner-animation { position: relative; display: grid; place-items: center; width: 76px; height: 76px; margin-bottom: 24px; color: var(--blue); }
+.scanner-beam { position: absolute; inset: 0; border: 2px solid transparent; border-top-color: var(--blue); border-radius: 50%; animation: spin 1.3s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.text-secondary { color: var(--muted); }
+.text-sm { font-size: 14px; }
+.text-xs { font-size: 12px; }
+.result-screen { background: #f6f8fa; align-items: stretch; }
+.bottom-sheet { width: min(100%, 540px); margin: auto; padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: #fff; box-shadow: 0 14px 40px rgba(21,32,43,.08); text-align: left; }
+.bottom-sheet > h3, .bottom-sheet > p, .bottom-sheet > .status-icon { text-align: center; }
+.status-icon { width: 52px; height: 52px; display: grid; place-items: center; margin: 0 auto 14px; border-radius: 50%; }
+.status-icon.success { color: #18845a; background: #e5f5ee; }
+.status-icon.error { color: var(--danger); background: #fbeaea; }
+.bottom-sheet h3 { margin: 0; font-size: 22px; }
+.result-card { margin: 22px 0; padding: 4px 18px; border: 1px solid var(--line); border-radius: 12px; }
+.result-row { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.result-row:last-child { border-bottom: 0; }
+.result-row label { display: block; margin-bottom: 5px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.result-row .value { color: var(--ink); font-size: 15px; font-weight: 600; }
+.bank-row { display: flex; align-items: center; gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.bank-icon { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 50%; color: var(--blue); background: var(--soft-blue); }
+.btn { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 9px; font-weight: 700; cursor: pointer; }
+.btn-primary { border: 1px solid var(--blue); color: #fff; background: var(--blue); }
+.btn-primary:hover { background: var(--blue-dark); }
+.btn-primary:disabled { cursor: not-allowed; opacity: .45; }
+.btn-outline { border: 1px solid var(--line); color: var(--ink); background: #fff; }
+.btn-ghost { display: block; margin: 14px auto 0; border: 0; color: var(--muted); background: transparent; cursor: pointer; }
+
+@media (max-width: 600px) {
+  .capture-screen { width: min(100% - 28px, 760px); padding-top: 32px; }
+  .camera-container { min-height: 360px; height: 56vh; border-radius: 14px; }
+  .scan-box-wrapper { padding: 0 7%; }
+  .bottom-sheet { padding: 22px 18px; border-radius: 14px; }
+}
