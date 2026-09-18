@@ -56,7 +56,7 @@ export interface RecognizeResult {
   error?: ApiErrorDetail;
 }
 
-const API_URL = '/v1';
+const API_URL = import.meta.env.VITE_API_URL || '/v1';
 const API_KEY = import.meta.env.VITE_SNAPACCOUNT_API_KEY;
 
 export async function recognizeAccountImage(imageBlob: Blob): Promise<RecognizeResult> {
